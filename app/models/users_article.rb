@@ -1,4 +1,4 @@
 class UsersArticle < ApplicationRecord
-  belongs to :articles
-  belongs to :users
+  belongs_to :articles
+  belongs_to :users
 end
