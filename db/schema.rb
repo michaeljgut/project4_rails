@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171014211309) do
+ActiveRecord::Schema.define(version: 20171019223217) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20171014211309) do
     t.date "publication_date"
     t.string "url"
     t.integer "user_id"
-    t.index ["url"], name: "index_articles_on_url", unique: true
+    t.index ["url"], name: "index_articles_on_url"
   end
 
   create_table "topics", force: :cascade do |t|
