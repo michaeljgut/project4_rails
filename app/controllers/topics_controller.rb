@@ -13,10 +13,10 @@ class TopicsController < ApplicationController
           query_type: params[:type]
       )
     end
-    @users_topic = UsersTopic.create(
-      user_id: params[:user_id],
-      topic_id: @topic.id
-    )
+    # @users_topic = UsersTopic.create(
+    #   user_id: params[:user_id],
+    #   topic_id: @topic.id
+    # )
     render json: { topic: @topic }
   end
 
