@@ -2,17 +2,17 @@ class TopicsController < ApplicationController
 #  before_action :authenticate_user!, except: [ :index, :create, :show, :destroy]
   before_action :authenticate_user!
   def create
-    puts 'params = ', params
-    @topic = Topic.find_by(name: params[:name])
-    puts '@topic = ',@topic
-    if @topic
-    else
-      @topic = Topic.create(
-          name: params[:name],
-          user_id: params[:user_id],
-          query_type: params[:type]
-      )
-    end
+    # puts 'params = ', params
+    # @topic = Topic.find_by(name: params[:name])
+    # puts '@topic = ',@topic
+    # if @topic
+    # else
+    @topic = Topic.create(
+        name: params[:name],
+        user_id: params[:user_id],
+        query_type: params[:type]
+    )
+    # end
     # @users_topic = UsersTopic.create(
     #   user_id: params[:user_id],
     #   topic_id: @topic.id
