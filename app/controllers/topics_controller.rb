@@ -35,7 +35,7 @@ class TopicsController < ApplicationController
     #   WHERE users_topics.user_id = ' + params[:user_id]
     # puts 'query = ', query
     @topics = Topic.where(user_id: params[:user_id])
-      render json: @topics
+#      render json: @topics
 #    @topics = Topic.joins(query)
     render json: @topics
   end
