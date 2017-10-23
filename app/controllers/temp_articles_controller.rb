@@ -1,4 +1,4 @@
-class ArticlesController < ApplicationController
+class TempArticlesController < ApplicationController
   before_action :authenticate_user!
 #  before_action :authenticate_user!, except: [ :index, :create, :show, :destroy]
   # def index
@@ -7,13 +7,14 @@ class ArticlesController < ApplicationController
   # end
   def create
       puts 'params = ', params
-      @article = Article.create(
+      @tempArticle = TempArticle.create(
           title: params[:title],
           url: params[:url],
           publication_date: params[:publication_date],
-          user_id: params[:user_id]
+          user_id: params[:user_id],
+          search_unit: params[:search_unit]
       )
-      render json: { article: @article }
+      render json: { tempArticle: @tempArticle }
   end
 
   def show
@@ -21,19 +22,19 @@ class ArticlesController < ApplicationController
     puts 'user id = ', params[:user_id]
     puts 'id = ', params[:id]
 
-    @articles = Article.where(user_id: params[:user_id])
-      render json: @articles
+    @tempArticles = TempArticle.where(user_id: params[:user_id])
+      render json: @tempArticles
   end
 
   def index
     puts 'user id = ', current_user
     puts 'user id = ', params[:user_id]
-    @articles = Article.where(user_id: params[:user_id])
-      render json: @articles
+    @tempArticles = TempArticle.where(user_id: params[:user_id])
+      render json: @tempArticles
   end
 
   def destroy
-    Article.destroy(params[:id])
+    TemppArticle.destroy(params[:id])
     # render json: Article.all
   end
 end
