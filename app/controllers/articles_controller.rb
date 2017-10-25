@@ -21,7 +21,7 @@ class ArticlesController < ApplicationController
     puts 'user id = ', params[:user_id]
     puts 'id = ', params[:id]
 
-    @articles = Article.where(user_id: params[:id])
+    @articles = Article.where(user_id: params[:user_id])
       render json: @articles
   end
 
