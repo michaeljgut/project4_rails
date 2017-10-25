@@ -41,4 +41,8 @@ class TempArticlesController < ApplicationController
     @tempArticles = TempArticle.where('user_id = ? AND search_unit = ? AND created_at < ?',
       params[:user_id], params[:unit_no], 12.hours.ago).destroy_all
   end
+  def destroy_temp
+    @tempArticles = TempArticle.where('user_id = ? AND search_unit = ?',
+      params[:user_id], params[:unit_no]).destroy_all
+  end
 end

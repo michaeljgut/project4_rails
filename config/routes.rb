@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   match 'temp_articles/' => 'temp_articles#destroy_some', :via => :delete, :as => 'destroy_some'
 
+  match 'temp_articles/temp' => 'temp_articles#destroy_temp', :via => :delete, :as => 'destroy_temp'
+
   resources :temp_articles
 
   resources :topics
