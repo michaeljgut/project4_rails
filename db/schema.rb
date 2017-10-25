@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171023003134) do
+ActiveRecord::Schema.define(version: 20171025141915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20171023003134) do
     t.integer "search_unit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["url", "user_id"], name: "index_temp_articles_on_url_and_user_id", unique: true
   end
 
   create_table "topics", force: :cascade do |t|

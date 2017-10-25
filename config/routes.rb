@@ -3,6 +3,10 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :articles
 
+  match 'temp_articles/' => 'temp_articles#destroy_some', :via => :delete, :as => 'destroy_some'
+
+  resources :temp_articles
+
   resources :topics
 
   root to: "articles#index"

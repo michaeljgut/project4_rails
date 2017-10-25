@@ -17,24 +17,28 @@ class TempArticlesController < ApplicationController
       render json: { tempArticle: @tempArticle }
   end
 
-  def show
+  def index
     puts 'user id = ', current_user
     puts 'user id = ', params[:user_id]
     puts 'id = ', params[:id]
 
-    @tempArticles = TempArticle.where(user_id: params[:user_id])
+    # @tempArticles = TempArticle.where(user_id: params[:user_id])
+    @tempArticles = TempArticle.where('user_id = ? AND search_unit = ?',
+      params[:user_id], params[:unit_no]).order(publication_date: :desc, title: :desc)
       render json: @tempArticles
   end
 
-  def index
-    puts 'user id = ', current_user
-    puts 'user id = ', params[:user_id]
-    @tempArticles = TempArticle.where(user_id: params[:user_id])
+  def show
+    @tempArticles = TempArticle.find(params[:id])
       render json: @tempArticles
   end
 
   def destroy
     TemppArticle.destroy(params[:id])
     # render json: Article.all
+  end
+  def destroy_some
+    @tempArticles = TempArticle.where('user_id = ? AND search_unit = ? AND created_at < ?',
+      params[:user_id], params[:unit_no], 12.hours.ago).destroy_all
   end
 end
