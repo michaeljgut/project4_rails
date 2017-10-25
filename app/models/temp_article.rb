@@ -1,0 +1,2 @@
+class TempArticle < ApplicationRecord
+end
