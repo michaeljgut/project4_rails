@@ -28,7 +28,7 @@ class ArticlesController < ApplicationController
   def index
     puts 'user id = ', current_user
     puts 'user id = ', params[:user_id]
-    @articles = Article.where(user_id: params[:user_id])
+    @articles = Article.where(user_id: params[:user_id]).order(publication_date: :desc, title: :asc)
       render json: @articles
   end
 
