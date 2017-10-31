@@ -24,7 +24,7 @@ class TempArticlesController < ApplicationController
 
     # @tempArticles = TempArticle.where(user_id: params[:user_id])
     @tempArticles = TempArticle.where('user_id = ? AND search_unit = ?',
-      params[:user_id], params[:unit_no]).order(publication_date: :desc, title: :desc)
+      params[:user_id], params[:unit_no]).order(publication_date: :desc, title: :asc)
       render json: @tempArticles
   end
 
