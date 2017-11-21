@@ -38,11 +38,11 @@ class TempArticlesController < ApplicationController
     # render json: Article.all
   end
   def destroy_some
-    @tempArticles = TempArticle.where('user_id = ? AND search_unit = ? AND created_at < ?',
+    TempArticle.where('user_id = ? AND search_unit = ? AND created_at < ?',
       params[:user_id], params[:unit_no], 12.hours.ago).destroy_all
   end
   def destroy_temp
-    @tempArticles = TempArticle.where('user_id = ? AND search_unit = ?',
+    TempArticle.where('user_id = ? AND search_unit = ?',
       params[:user_id], params[:unit_no]).destroy_all
   end
 end
