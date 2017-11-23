@@ -2,22 +2,27 @@ class TopicsController < ApplicationController
 #  before_action :authenticate_user!, except: [ :index, :create, :show, :destroy]
   before_action :authenticate_user!
   def create
-    # puts 'params = ', params
-    # @topic = Topic.find_by(name: params[:name])
-    # puts '@topic = ',@topic
-    # if @topic
-    # else
-    @topic = Topic.create(
-        name: params[:name],
-        user_id: params[:user_id],
-        query_type: params[:type]
-    )
-    # end
-    # @users_topic = UsersTopic.create(
-    #   user_id: params[:user_id],
-    #   topic_id: @topic.id
-    # )
-    render json: { topic: @topic }
+    puts 'params = ', params
+    @topic = Topic.where('user_id = ? AND search_unit = ?', params[:user_id], params[:search_unit])
+    puts '@topic = ',@topic
+    if @topic.any?
+      puts '@topic = ',@topic
+      @topic.update_all(:name => params[:name],
+                        :query_type => params[:query_type])
+    else
+      @topic = Topic.create(
+          name: params[:name],
+          user_id: params[:user_id],
+          query_type: params[:query_type],
+          search_unit: params[:search_unit]
+      )
+      # end
+      # @users_topic = UsersTopic.create(
+      #   user_id: params[:user_id],
+      #   topic_id: @topic.id
+      # )
+      render json: { topic: @topic }
+    end
   end
 
   def show
@@ -34,7 +39,19 @@ class TopicsController < ApplicationController
     # query = 'INNER JOIN users_topics ON users_topics.topic_id = topics.id
     #   WHERE users_topics.user_id = ' + params[:user_id]
     # puts 'query = ', query
-    @topics = Topic.where(user_id: params[:user_id])
+    @topics = Topic.where('user_id = ? AND search_unit = ?', params[:user_id], 0)
+#      render json: @topics
+#    @topics = Topic.joins(query)
+    render json: @topics
+  end
+
+  def index_save
+    puts 'user id = ', current_user
+    puts 'user id = ', params[:user_id]
+    # query = 'INNER JOIN users_topics ON users_topics.topic_id = topics.id
+    #   WHERE users_topics.user_id = ' + params[:user_id]
+    # puts 'query = ', query
+    @topics = Topic.where('user_id = ? AND search_unit = ?', params[:user_id], params[:unit_no])
 #      render json: @topics
 #    @topics = Topic.joins(query)
     render json: @topics
