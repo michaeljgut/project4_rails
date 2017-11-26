@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   match 'topics/save' => 'topics#index_save', :via => :get, :as => 'index_save'
 
+  match 'topics/save' => 'topics#destroy_save', :via => :delete, :as => 'destroy_save'
+
   resources :temp_articles
 
   resources :topics
