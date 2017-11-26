@@ -3,7 +3,7 @@ class TopicsController < ApplicationController
   before_action :authenticate_user!
   def create
     puts 'params = ', params
-    @topic = Topic.where('user_id = ? AND search_unit = ?', params[:user_id], params[:search_unit])
+    @topic = Topic.where('user_id = ? AND search_unit = ? AND search_unit != 0', params[:user_id], params[:search_unit])
     puts '@topic = ',@topic
     if @topic.any?
       puts '@topic = ',@topic
@@ -75,6 +75,11 @@ class TopicsController < ApplicationController
     #   raise "Error!"
     # end
     Topic.destroy(params[:id])
+  end
+
+  def destroy_save
+    Topic.where('user_id = ? AND search_unit = ? AND created_at < ?',
+      params[:user_id], params[:unit_no], 12.hours.ago).destroy_all
   end
 
   def topic_params
