@@ -39,7 +39,7 @@ class TopicsController < ApplicationController
     # query = 'INNER JOIN users_topics ON users_topics.topic_id = topics.id
     #   WHERE users_topics.user_id = ' + params[:user_id]
     # puts 'query = ', query
-    @topics = Topic.where('user_id = ? AND search_unit = ?', params[:user_id], 0)
+    @topics = Topic.where('user_id = ? AND search_unit = ?', params[:user_id], 0).order(created_at: :asc)
 #      render json: @topics
 #    @topics = Topic.joins(query)
     render json: @topics
@@ -51,7 +51,8 @@ class TopicsController < ApplicationController
     # query = 'INNER JOIN users_topics ON users_topics.topic_id = topics.id
     #   WHERE users_topics.user_id = ' + params[:user_id]
     # puts 'query = ', query
-    @topics = Topic.where('user_id = ? AND search_unit = ?', params[:user_id], params[:unit_no])
+    @topics = Topic.where('user_id = ? AND search_unit = ?',
+      params[:user_id], params[:unit_no]).order(created_at: :asc)
 #      render json: @topics
 #    @topics = Topic.joins(query)
     render json: @topics
